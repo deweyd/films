@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://deweyd.github.io/films/sitemap.xml
