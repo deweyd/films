@@ -3,15 +3,14 @@
 <head>
     <meta charset="utf-8">
     <script type="text/javascript">
-        (function(l) {
-            if (l.search[1] === 'p') {
-                // Отримуємо значення після ?p=
-                var p = l.search.slice(3).split('&')[0];
-                // Формуємо чистий шлях без дублювання /films/
-                var newPath = l.pathname.replace(/\/$/, '') + '/' + decodeURIComponent(p);
-                window.history.replaceState(null, null, newPath + l.hash);
-            }
-        }(window.location))
+        var l = window.location;
+        var pathArray = l.pathname.split('/');
+        var repo = pathArray[1];
+        var restOfPath = pathArray.slice(2).join('/');
+
+        var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/' + repo + '/?p=' + encodeURIComponent(restOfPath) + l.hash;
+
+        l.replace(newUrl);
     </script>
 </head>
 <body></body>
