@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <script type="text/javascript">
         var l = window.location;
-        // Репозиторій: /films/ | Шлях: Genre/28
-        // Отримуємо "/films"
-        var repo = '/' + l.pathname.split('/')[1];
-        // Отримуємо все, що йде після "/films/"
-        var path = l.pathname.split('/').slice(2).join('/');
+        // Отримуємо назву репозиторію (перший сегмент)
+        var pathArray = l.pathname.split('/');
+        var repo = pathArray[1];
+        // Отримуємо все, що йде ПІСЛЯ репозиторію, і з'єднуємо назад через '/'
+        var restOfPath = pathArray.slice(2).join('/');
 
-        // Перенаправляємо на /films/?p=Genre/28
-        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repo + '/?p=' + path + l.hash);
+        // Формуємо URL: /films/?p=MoviePage/299534
+        var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/' + repo + '/?p=' + encodeURIComponent(restOfPath) + l.hash;
+
+        l.replace(newUrl);
     </script>
 </head>
 <body></body>
